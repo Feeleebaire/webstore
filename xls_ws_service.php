@@ -2949,9 +2949,10 @@ EOS;
                             QQ::AndCondition(
                                 QQ::Equal(QQN::Cart()->Type , CartType::order)
                             ,   QQ::Equal(QQN::Cart()->Downloaded, 0)
-                            )); 
-                                    
-            return $this->qobjects_to_string($carts);
+                            ),QQ::Clause(QQ::LimitInfo(50)));
+
+
+	        return $this->qobjects_to_string($carts);
             
         }       
         
@@ -2977,7 +2978,7 @@ EOS;
                             QQ::AndCondition(
                                 QQ::Equal(QQN::Cart()->Type , CartType::order)
                             ,   QQ::GreaterOrEqual(QQN::Cart()->Submitted, $dttSubmitted)
-                            ));
+                            ),QQ::Clause(QQ::LimitInfo(50)));
             
             return $this->qobjects_to_string($carts);
             

@@ -828,6 +828,12 @@ function _xls_site_url($strUrlPath =  '', $blnOnlyHost = false) {
 					) $usessl = true;
 	}
 
+	//Don't use SSL for Admin Panel unless our inbound URL used it
+	if (stripos($strUrlPath,'xls_admin.php') !==false) {
+		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443)
+			$usessl = true;
+			else $usessl = false;
+	}
 
 	return _xls_site_dir($usessl,$blnOnlyHost) . '/' . $strUrlPath;
 
