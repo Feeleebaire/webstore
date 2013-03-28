@@ -113,7 +113,7 @@ class xlsws_product_listing extends xlsws_index {
 			            QQ::AndCondition(
 				            QQ::Equal(QQN::Product()->Current, 0),
 				            QQ::Equal(QQN::Product()->Inventoried, 1),
-				            QQ::GreaterThan(QQN::Product()->InventoryAvail, 0)
+				            QQ::GreaterThan(Product::getInventoryQQN(), 0)
 			            )
 			            )
 		            )
@@ -126,7 +126,7 @@ class xlsws_product_listing extends xlsws_index {
 			        QQ::AndCondition(
 				        QQ::Equal(QQN::Product()->Current, 0),
 				        QQ::Equal(QQN::Product()->Inventoried, 1),
-				        QQ::GreaterThan(QQN::Product()->InventoryAvail, 0)
+				        QQ::GreaterThan(Product::getInventoryQQN(), 0)
 			        )),
 
 	            QQ::OrCondition(          
@@ -142,7 +142,7 @@ class xlsws_product_listing extends xlsws_index {
 		if (_xls_get_conf('INVENTORY_OUT_ALLOW_ADD',0) == 0) {
 			 $objAvailCondition = 
 			 	QQ::OrCondition(
-			 		QQ::GreaterThan(QQN::Product()->InventoryAvail, 0),
+			 		QQ::GreaterThan(Product::getInventoryQQN(), 0),
                 	QQ::Equal(QQN::Product()->Inventoried, 0)
                 );
 			 		

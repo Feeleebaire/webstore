@@ -308,6 +308,24 @@ class Product extends ProductGen {
 			return 'fltInventory';
 	}
 
+	public static function getInventoryQQN()
+	{
+		$invType = _xls_get_conf('INVENTORY_RESERVED','0');
+		if ($invType == '1')
+		{
+			return QQN::Product()->InventoryAvail;
+		}
+		else {
+			$invType = _xls_get_conf('INVENTORY_FIELD_TOTAL','0');
+			if ($invType == '1')
+				return QQN::Product()->InventoryTotal;
+			else
+				return QQN::Product()->Inventory;
+
+		}
+
+
+	}
 	/**
 	 * Return the property name representing the inventory databse field
 	 * @return string
